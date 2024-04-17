@@ -1,7 +1,14 @@
 import React from "react";
 
-function ShowTask({taskList, setTaskList}) {
-    // console.log(taskList)
+function ShowTask({taskList, setTaskList, task, setTask}) {
+    const handleDelete = (id) =>{
+      setTaskList(taskList.filter((task)=> task.id !==id))
+    }
+
+    const handleEdit = (id) =>{
+        const toEditObj = taskList.find((ele)=> ele.id === id)
+        setTask(toEditObj);
+    }
  
   return (
     <section className="showTask">
@@ -19,8 +26,8 @@ function ShowTask({taskList, setTaskList}) {
               <span className="name">{task.name}</span>
               <span className="time">{task.time}</span>
             </p>
-            <i className="bi bi-pencil-square"></i>
-            <i className="bi bi-trash"></i>
+            <i className="bi bi-pencil-square" onClick={()=>handleEdit(task.id)}></i>
+            <i className="bi bi-trash" onClick={()=>handleDelete(task.id)}></i>
           </li>
         ))}
         
